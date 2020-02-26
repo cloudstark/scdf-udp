@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+		<artifactId>udp-app-starters-build</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>spring-cloud-starter-stream-source-udp</artifactId>
+	<packaging>jar</packaging>
+
+	<name>spring-cloud-starter-stream-source-udp</name>
+	<description>Spring Cloud Stream udp-source core</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud.stream.app</groupId>
+			<artifactId>udp-app-starters-common</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.springframework.cloud.stream.app</groupId>
+			<artifactId>app-starters-test-support</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-test-support</artifactId>
+			<scope>test</scope>
+		</dependency>
+		-->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-app-starter-doc-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.cloud.stream.app.plugin</groupId>
+				<artifactId>spring-cloud-stream-app-maven-plugin</artifactId>
+				<version>1.2.12.RELEASE</version>
+				<configuration>
+					<generatedProjectHome>${session.executionRootDirectory}/apps</generatedProjectHome>
+					<generatedProjectVersion>${project.version}</generatedProjectVersion>
+					<bom>
+						<name>scs-bom</name>
+						<groupId>org.springframework.cloud.stream.app</groupId>
+						<artifactId>udp-app-dependencies</artifactId>
+						<version>${project.version}</version>
+					</bom>
+					<generatedApps>
+						<udp-source>
+							<autoConfigClass>org.springframework.cloud.stream.app.udp.source.UdpSourceConfiguration.class</autoConfigClass>
+				</udp-source>
+					</generatedApps>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

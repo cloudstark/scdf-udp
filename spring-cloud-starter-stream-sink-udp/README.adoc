@@ -1,0 +1,43 @@
+//tag::ref-doc[]
+= UDP Sink
+
+This module writes messages to UDP Unicast.
+
+== Input
+
+==== Headers:
+
+*
+
+==== Payload:
+
+*
+
+== Output
+
+N/A
+
+== Options
+
+The **$$udp$$** $$sink$$ has the following options:
+
+//tag::configuration-properties[]
+//end::configuration-properties[]
+
+== Build
+
+```
+$ ./mvnw clean install -PgenerateApps
+$ cd apps
+```
+You can find the corresponding binder based projects here. You can then cd into one one of the folders and build it:
+```
+$ ./mvnw clean package
+```
+
+== Examples
+
+```
+java -jar udp_sink.jar --tcp.encoder=LF
+```
+//end::ref-doc[]

@@ -1,0 +1,43 @@
+//tag::ref-doc[]
+= UDP
+The `udp` source acts as a server and allows a remote party to connect to it and submit data over a raw udp socket.
+
+Messages produced by the UDP source application have a `byte[]` payload.
+
+== Input
+
+N/A
+
+== Output
+
+==== Headers:
+
+* `Content-Type: application/octet-stream`
+
+==== Payload:
+
+* `byte[]`
+
+== Options
+
+//tag::configuration-properties[]
+$$udp.port$$:: $$The port on which to listen; 0 for the OS to choose a port.$$ *($$Integer$$, default: `$$1234$$`)*
+//end::configuration-properties[]
+
+== Build
+
+```shell
+$ ./mvnw clean install -PgenerateApps
+$ cd apps
+```
+You can find the corresponding binder based projects here. You can then cd into one one of the folders and build it:
+```shell
+$ ./mvnw clean package
+```
+
+== Examples
+
+```shell
+$ java -jar udp_source.jar
+```
+//end::ref-doc[]
