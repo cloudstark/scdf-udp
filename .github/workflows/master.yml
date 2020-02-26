@@ -163,6 +163,7 @@ jobs:
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
         if: always()
         with:
+          channel: 'scdf-udp'
           type: ${{ job.status }}
           job_name: '*Publish ${{ env.PROJECT_VERSION }} on Bintray/JCenter*'
           mention: 'here'
