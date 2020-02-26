@@ -16,7 +16,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud.stream.app</groupId>
+			<groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
 			<artifactId>udp-app-starters-common</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
@@ -56,7 +56,7 @@
 					<generatedApps>
 						<udp-source>
 							<autoConfigClass>org.springframework.cloud.stream.app.udp.source.UdpSourceConfiguration.class</autoConfigClass>
-				</udp-source>
+						</udp-source>
 					</generatedApps>
 				</configuration>
 			</plugin>
