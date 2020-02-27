@@ -130,7 +130,7 @@ jobs:
           path: apps
           key: apps-${{ github.sha }}
       - name: Build the project
-        run: mvn $MAVEN_CLI_OPTS package -DskipTests -PgenerateApps
+        run: mvn $MAVEN_CLI_OPTS install -DskipTests -PgenerateApps
       - name: Rocket.Chat Notification
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
         if: failure()
