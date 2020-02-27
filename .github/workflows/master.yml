@@ -124,6 +124,11 @@ jobs:
         with:
           path: .m2/repository/
           key: ${{ github.ref }}
+      - name: Setup app cache
+        uses: actions/cache@v1
+        with:
+          path: apps
+          key: apps-${{ github.sha }}
       - name: Build the project
         run: mvn $MAVEN_CLI_OPTS package -DskipTests
       - name: Rocket.Chat Notification
@@ -186,6 +191,11 @@ jobs:
         with:
           path: .m2/repository/
           key: ${{ github.ref }}
+      - name: Setup app cache
+        uses: actions/cache@v1
+        with:
+          path: apps
+          key: apps-${{ github.sha }}
       - name: Build the project
         run: mvn $MAVEN_CLI_OPTS -f apps/pom.xml package -DskipTests
       - name: Rocket.Chat Notification
