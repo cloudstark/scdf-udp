@@ -1,35 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
-    <artifactId>udp-app-starters-build</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+  <artifactId>udp-app-starters-build</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.springframework.cloud.stream.app</groupId>
-        <artifactId>app-starters-build</artifactId>
-        <version>2.1.2.RELEASE</version>
-        <relativePath/>
-    </parent>
+  <name>udp-app-starters-build</name>
+  <inceptionYear>2020</inceptionYear>
+  <licenses>
+    <license>
+      <distribution>repo</distribution>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
 
-    <modules>
-        <module>spring-cloud-starter-stream-sink-udp</module>
-        <module>spring-cloud-starter-stream-source-udp</module>
-        <module>udp-app-dependencies</module>
-        <module>udp-app-starters-common</module>
-    </modules>
+  <parent>
+    <groupId>org.springframework.cloud.stream.app</groupId>
+    <artifactId>app-starters-build</artifactId>
+    <version>2.1.2.RELEASE</version>
+    <relativePath/>
+  </parent>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
-                <artifactId>udp-app-dependencies</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+  <modules>
+    <module>spring-cloud-starter-stream-sink-udp</module>
+    <module>spring-cloud-starter-stream-source-udp</module>
+    <module>udp-app-dependencies</module>
+    <module>udp-app-starters-common</module>
+  </modules>
+
+  <distributionManagement>
+    <repository>
+      <id>bintray-cloudstark-maven</id>
+      <name>cloudstark-maven</name>
+      <url>https://api.bintray.com/maven/cloudstark/maven/scdf-udp/;publish=1</url>
+    </repository>
+    <snapshotRepository>
+      <id>oss-jfrog-artifactory</id>
+      <name>oss-jfrog-artifactory-snapshots</name>
+      <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+        <artifactId>udp-app-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <id>attach-sources</id>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven-source-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>spring</id>
+      <repositories>
+        <repository>
+          <id>spring-snapshots</id>
+          <name>Spring Snapshots</name>
+          <url>http://repo.spring.io/libs-snapshot-local</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>spring-milestones</id>
+          <name>Spring Milestones</name>
+          <url>http://repo.spring.io/libs-milestone-local</url>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>spring-releases</id>
+          <name>Spring Releases</name>
+          <url>http://repo.spring.io/release</url>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>spring-libs-release</id>
+          <name>Spring Libs Release</name>
+          <url>http://repo.spring.io/libs-release</url>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>spring-milestone-release</id>
+          <name>Spring Milestone Release</name>
+          <url>http://repo.spring.io/libs-milestone</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>spring-snapshots</id>
+          <name>Spring Snapshots</name>
+          <url>http://repo.spring.io/libs-snapshot-local</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+          <id>spring-milestones</id>
+          <name>Spring Milestones</name>
+          <url>http://repo.spring.io/libs-milestone-local</url>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
 </project>
