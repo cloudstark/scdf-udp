@@ -50,7 +50,7 @@
       <dependency>
         <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
         <artifactId>udp-app-dependencies</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
