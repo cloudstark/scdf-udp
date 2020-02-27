@@ -40,7 +40,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .m2/repository/
-          key: ${{ github.ref }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Install dependencies
         id: install
         run: mvn $MVN_CLI_OPTS clean install
@@ -69,7 +71,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .m2/repository/
-          key: ${{ github.ref }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Run tests
         run: mvn $MVN_CLI_OPTS test
       - name: Rocket.Chat Notification
@@ -123,14 +127,18 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .m2/repository/
-          key: ${{ github.ref }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Setup app cache
         uses: actions/cache@v1
         with:
           path: apps
-          key: apps-${{ github.sha }}
+          key: ${{ runner.os }}-apps-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-apps-
       - name: Build the project
-        run: mvn $MAVEN_CLI_OPTS install -DskipTests -Pspring -PgenerateApps
+        run: mvn $MAVEN_CLI_OPTS install -X -DskipTests -Pspring -PgenerateApps
       - name: Rocket.Chat Notification
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
         if: failure()
@@ -161,7 +169,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .m2/repository/
-          key: ${{ github.ref }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 #      - name: Publish on Bintray/JCenter
 #        run: mvn $MAVEN_CLI_OPTS deploy -DskipTests -Ddependency-check.skip=true
 #      - name: Rocket.Chat Notification
@@ -190,12 +200,16 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .m2/repository/
-          key: ${{ github.ref }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Setup app cache
         uses: actions/cache@v1
         with:
           path: apps
-          key: apps-${{ github.sha }}
+          key: ${{ runner.os }}-apps-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-apps-
       - name: Build the project
         run: mvn $MAVEN_CLI_OPTS -f apps/pom.xml package -DskipTests
       - name: Rocket.Chat Notification
@@ -228,7 +242,16 @@ jobs:
         uses: actions/cache@v1
         with:
           path: .m2/repository/
-          key: ${{ github.ref }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Setup app cache
+        uses: actions/cache@v1
+        with:
+          path: apps
+          key: ${{ runner.os }}-apps-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-apps-
       - name: Build the docker images
         run: mvn $MAVEN_CLI_OPTS -f apps/pom.xml docker:build
 
