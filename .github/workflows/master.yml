@@ -130,15 +130,15 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Setup app cache
-        uses: actions/cache@v1
-        with:
-          path: apps
-          key: ${{ runner.os }}-apps-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-apps-
+#      - name: Setup app cache
+#        uses: actions/cache@v1
+#        with:
+#          path: apps
+#          key: ${{ runner.os }}-apps-${{ github.sha }}
+#          restore-keys: |
+#            ${{ runner.os }}-apps-
       - name: Build the project
-        run: mvn $MAVEN_CLI_OPTS install -X -DskipTests -Pspring -PgenerateApps
+        run: mvn $MAVEN_CLI_OPTS install -DskipTests
       - name: Rocket.Chat Notification
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
         if: failure()
@@ -203,14 +203,16 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Setup app cache
-        uses: actions/cache@v1
-        with:
-          path: apps
-          key: ${{ runner.os }}-apps-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-apps-
+#      - name: Setup app cache
+#        uses: actions/cache@v1
+#        with:
+#          path: apps
+#          key: ${{ runner.os }}-apps-${{ github.sha }}
+#          restore-keys: |
+#            ${{ runner.os }}-apps-
       - name: Build the project
+        run: mvn $MAVEN_CLI_OPTS install -DskipTests -Pspring -PgenerateApps
+      - name: Build the app projects
         run: mvn $MAVEN_CLI_OPTS -f apps/pom.xml package -DskipTests
       - name: Rocket.Chat Notification
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
