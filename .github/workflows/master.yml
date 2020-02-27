@@ -157,13 +157,68 @@ jobs:
         with:
           path: .m2/repository/
           key: ${{ github.ref }}
-      - name: Publish on Bintray/JCenter
-        run: mvn $MAVEN_CLI_OPTS deploy -DskipTests -Ddependency-check.skip=true
+#      - name: Publish on Bintray/JCenter
+#        run: mvn $MAVEN_CLI_OPTS deploy -DskipTests -Ddependency-check.skip=true
+#      - name: Rocket.Chat Notification
+#        uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
+#        if: always()
+#        with:
+#          type: ${{ job.status }}
+#          job_name: '*Publish ${{ env.PROJECT_VERSION }} on Bintray/JCenter*'
+#          mention: 'here'
+#          url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
+
+  apps:
+    name: "build apps"
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Export project version
+        uses: ./.github/actions/export-project-version
+      - name: Setup Java 1.8
+        uses: joschi/setup-jdk@v1.0.0
+        with:
+          java-version: 'openjdk8'
+      - name: Setup cache
+        uses: actions/cache@v1
+        with:
+          path: .m2/repository/
+          key: ${{ github.ref }}
+      - name: Build the project
+        run: mvn $MAVEN_CLI_OPTS -f apps/pom.xml package -DskipTests
       - name: Rocket.Chat Notification
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
-        if: always()
+        if: failure()
         with:
           type: ${{ job.status }}
-          job_name: '*Publish ${{ env.PROJECT_VERSION }} on Bintray/JCenter*'
+          job_name: '*Build app starters*'
           mention: 'here'
+          mention_if: 'failure'
           url: ${{ secrets.ROCKETCHAT_WEBHOOK }}
+
+  docker:
+    name: "Docker build and push"
+    runs-on: ubuntu-latest
+    needs: [apps]
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Export project version
+        uses: ./.github/actions/export-project-version
+      - name: Setup Java 1.8
+        uses: joschi/setup-jdk@v1.0.0
+        with:
+          java-version: 'openjdk8'
+      - name: Setup cache
+        uses: actions/cache@v1
+        with:
+          path: .m2/repository/
+          key: ${{ github.ref }}
+      - name: Build the docker images
+        run: mvn $MAVEN_CLI_OPTS -f apps/pom.xml docker:build
+
