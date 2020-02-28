@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.cloud.stream.app</groupId>
     <artifactId>udp-app-starters-build</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
 
   <artifactId>spring-cloud-starter-stream-sink-udp</artifactId>
@@ -19,7 +19,7 @@
     <dependency>
       <groupId>org.springframework.cloud.stream.app</groupId>
       <artifactId>udp-app-starters-common</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <version>1.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud.stream.app</groupId>
