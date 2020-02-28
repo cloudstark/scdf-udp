@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+		<groupId>org.springframework.cloud.stream.app</groupId>
 		<artifactId>udp-app-starters-build</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>

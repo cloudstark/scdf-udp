@@ -10,7 +10,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+  <groupId>org.springframework.cloud.stream.app</groupId>
   <artifactId>udp-app-dependencies</artifactId>
   <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -22,24 +22,24 @@
     <repository>
       <id>bintray-cloudstark-maven</id>
       <name>cloudstark-maven</name>
-      <url>https://api.bintray.com/maven/cloudstark/maven/scdf-udp/;publish=1</url>
+      <url>https://api.bintray.com/maven/cloudstark/maven/scdf-udp</url>
     </repository>
     <snapshotRepository>
-      <id>oss-jfrog-artifactory</id>
-      <name>oss-jfrog-artifactory-snapshots</name>
-      <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+      <id>bintray-cloudstark-maven</id>
+      <name>cloudstark-maven</name>
+      <url>https://api.bintray.com/maven/cloudstark/maven/scdf-udp</url>
     </snapshotRepository>
   </distributionManagement>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+        <groupId>org.springframework.cloud.stream.app</groupId>
         <artifactId>spring-cloud-starter-stream-source-udp</artifactId>
         <version>0.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
-        <groupId>solutions.cloudstark.spring.cloud.stream.app</groupId>
+        <groupId>org.springframework.cloud.stream.app</groupId>
         <artifactId>spring-cloud-starter-stream-sink-udp</artifactId>
         <version>0.0.2-SNAPSHOT</version>
       </dependency>
