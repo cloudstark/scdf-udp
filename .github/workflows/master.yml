@@ -88,12 +88,20 @@ jobs:
       - name: Retag images
         run: |
           docker tag springcloudstream/udp-source-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-kafka:latest
+          docker tag springcloudstream/udp-source-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-kafka:${{ github.sha }}
           docker tag springcloudstream/udp-source-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-rabbit:latest
+          docker tag springcloudstream/udp-source-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-rabbit:{{ github.sha }}
           docker tag springcloudstream/udp-sink-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-kafka:latest
+          docker tag springcloudstream/udp-sink-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-kafka:{{ github.sha }}
           docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:latest
+          docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:{{ github.sha }}
       - name: Push images
         run: |
           docker push cloudstark/scdf-udp-source-kafka:latest
+          docker push cloudstark/scdf-udp-source-kafka:${{ github.sha }}
           docker push cloudstark/scdf-udp-source-rabbit:latest
+          docker push cloudstark/scdf-udp-source-rabbit:${{ github.sha }}
           docker push cloudstark/scdf-udp-sink-kafka:latest
+          docker push cloudstark/scdf-udp-sink-kafka:${{ github.sha }}
           docker push cloudstark/scdf-udp-sink-rabbit:latest
+          docker push cloudstark/scdf-udp-sink-rabbit:${{ github.sha }}
