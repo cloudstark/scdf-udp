@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,18 +33,15 @@ import org.springframework.integration.ip.udp.UnicastReceivingChannelAdapter;
 @EnableConfigurationProperties({UdpSourceProperties.class, UdpConnectionProperties.class})
 public class UdpSourceConfiguration {
 
-    @Autowired
-    private UdpSourceProperties properties;
+  @Autowired private UdpSourceProperties properties;
 
-    @Autowired
-    private UdpConnectionProperties udpConnectionProperties;
+  @Autowired private UdpConnectionProperties udpConnectionProperties;
 
-    @Bean
-    public UnicastReceivingChannelAdapter adapter() {
-        UnicastReceivingChannelAdapter adapter =
-                new UnicastReceivingChannelAdapter(udpConnectionProperties.getPort());
-        adapter.setOutputChannelName(Source.OUTPUT);
-        return adapter;
-    }
-
+  @Bean
+  public UnicastReceivingChannelAdapter adapter() {
+    UnicastReceivingChannelAdapter adapter =
+        new UnicastReceivingChannelAdapter(udpConnectionProperties.getPort());
+    adapter.setOutputChannelName(Source.OUTPUT);
+    return adapter;
+  }
 }

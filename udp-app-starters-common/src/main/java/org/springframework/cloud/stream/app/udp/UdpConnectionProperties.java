@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,17 +26,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("udp")
 public class UdpConnectionProperties {
 
-    /**
-     * The port on which to listen; 0 for the OS to choose a port.
-     */
-    private int port = 1234;
+  /** The port on which to listen; 0 for the OS to choose a port. */
+  private int port = 1234;
 
-    public int getPort() {
-        return this.port;
-    }
+  public int getPort() {
+    return this.port;
+  }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
+  public void setPort(int port) {
+    this.port = port;
+  }
 }
