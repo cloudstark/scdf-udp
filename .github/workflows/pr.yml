@@ -7,10 +7,22 @@ env:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
 jobs:
+  check-version:
+    name: check SNAPSHOT version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Export project version
+        uses: ./.github/actions/export-project-version
+      - name: Check version is SNAPSHOT
+        run: |
+          echo $PROJECT_VERSION | egrep '^([0-9]+\.){1,2}([0-9]+(-SNAPSHOT))?$'
+
   install:
     name: install
     runs-on: ubuntu-latest
-    needs: check-version
+    needs: [check-version]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -62,4 +74,3 @@ jobs:
         run: |
           mvn $MAVEN_CLI_OPTS install -DskipTests -Pspring -PgenerateApps
           mvn $MAVEN_CLI_OPTS -f apps/pom.xml package docker:build -DskipTests -Pspring
-
