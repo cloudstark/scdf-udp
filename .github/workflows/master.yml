@@ -94,13 +94,6 @@ jobs:
           docker tag springcloudstream/udp-sink-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-kafka:${{ github.sha }}
           docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:latest
           docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:${{ github.sha }}
-      - name: Docker Tag Tag
-        if: contains(github.ref, 'tags/v')
-        run: |
-          docker tag springcloudstream/udp-source-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-kafka:${GITHUB_REF:11}
-          docker tag springcloudstream/udp-source-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-rabbit:${GITHUB_REF:11}
-          docker tag springcloudstream/udp-sink-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-kafka:${GITHUB_REF:11}
-          docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:${GITHUB_REF:11}
       - name: Docker Push Latest
         run: |
           docker push cloudstark/scdf-udp-source-kafka:latest
@@ -111,10 +104,3 @@ jobs:
           docker push cloudstark/scdf-udp-sink-kafka:${{ github.sha }}
           docker push cloudstark/scdf-udp-sink-rabbit:latest
           docker push cloudstark/scdf-udp-sink-rabbit:${{ github.sha }}
-      - name: Docker Push Latest
-        if: contains(github.ref, 'tags/v')
-        run: |
-          docker push cloudstark/scdf-udp-source-kafka:${GITHUB_REF:11}
-          docker push cloudstark/scdf-udp-source-rabbit:${GITHUB_REF:11}
-          docker push cloudstark/scdf-udp-sink-kafka:${GITHUB_REF:11}
-          docker push cloudstark/scdf-udp-sink-rabbit:${GITHUB_REF:11}
