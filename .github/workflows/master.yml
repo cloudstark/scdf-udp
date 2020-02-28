@@ -112,10 +112,10 @@ jobs:
 #            -Dsonar.login=$SONAR_TOKEN \
 #            -Ddependency-check.skip=true
 
-  docker:
-    name: "Docker build and push"
+  build:
+    name: "Build apps and images"
     runs-on: ubuntu-latest
-    needs: [apps]
+    needs: [test]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
