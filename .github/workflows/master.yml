@@ -45,7 +45,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Install dependencies
         id: install
-        run: mvn $MVN_CLI_OPTS dependency:resolve -Pspring
+        run: mvn $MVN_CLI_OPTS install
       - name: Rocket.Chat Notification
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@master
         if: failure()
