@@ -12,7 +12,7 @@
 
   <groupId>org.springframework.cloud.stream.app</groupId>
   <artifactId>udp-app-dependencies</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>udp-app-dependencies</name>
@@ -36,12 +36,12 @@
       <dependency>
         <groupId>org.springframework.cloud.stream.app</groupId>
         <artifactId>spring-cloud-starter-stream-source-udp</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.cloud.stream.app</groupId>
         <artifactId>spring-cloud-starter-stream-sink-udp</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
