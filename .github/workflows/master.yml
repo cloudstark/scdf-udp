@@ -13,21 +13,22 @@ env:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
 jobs:
-#  check-version:
-#    name: check SNAPSHOT version
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#      - name: Export project version
-#        uses: ./.github/actions/export-project-version
-#      - name: Check version is SNAPSHOT
-#        run: |
-#          echo $PROJECT_VERSION | egrep '^([0-9]+\.){1,2}([0-9]+(-SNAPSHOT))?$'
+  check-version:
+    name: check SNAPSHOT version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Export project version
+        uses: ./.github/actions/export-project-version
+      - name: Check version is SNAPSHOT
+        run: |
+          echo $PROJECT_VERSION | egrep '^([0-9]+\.){1,2}([0-9]+(-SNAPSHOT))?$'
 
   install:
     name: install
     runs-on: ubuntu-latest
+    needs: [check-version]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -87,20 +88,12 @@ jobs:
       - name: Docker Tag Latest
         run: |
           docker tag springcloudstream/udp-source-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-kafka:latest
-          docker tag springcloudstream/udp-source-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-kafka:${{ github.sha }}
           docker tag springcloudstream/udp-source-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-rabbit:latest
-          docker tag springcloudstream/udp-source-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-source-rabbit:${{ github.sha }}
           docker tag springcloudstream/udp-sink-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-kafka:latest
-          docker tag springcloudstream/udp-sink-kafka:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-kafka:${{ github.sha }}
           docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:latest
-          docker tag springcloudstream/udp-sink-rabbit:${{ env.PROJECT_VERSION }} cloudstark/scdf-udp-sink-rabbit:${{ github.sha }}
       - name: Docker Push Latest
         run: |
           docker push cloudstark/scdf-udp-source-kafka:latest
-          docker push cloudstark/scdf-udp-source-kafka:${{ github.sha }}
           docker push cloudstark/scdf-udp-source-rabbit:latest
-          docker push cloudstark/scdf-udp-source-rabbit:${{ github.sha }}
           docker push cloudstark/scdf-udp-sink-kafka:latest
-          docker push cloudstark/scdf-udp-sink-kafka:${{ github.sha }}
           docker push cloudstark/scdf-udp-sink-rabbit:latest
-          docker push cloudstark/scdf-udp-sink-rabbit:${{ github.sha }}
