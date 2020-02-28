@@ -1,4 +1,6 @@
-# UDP Source and Sink
+[float]
+UDP Source and Sink image:https://github.com/cloudstark/scdf-udp/workflows/master/badge.svg[Build Status,link=https://github.com/cloudstark/scdf-udp/actions?query=workflow%3Amaster]
+===================================================================================================================================
 
 To learn more about this application and the supported properties, please review the following link.
 
